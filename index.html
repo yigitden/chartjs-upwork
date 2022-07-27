@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chart - Richards upwork</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div
+      class="chart-container"
+      style="position: relative; margin: auto; height: 90vh; width: 90vw"
+    >
+      <canvas
+        id="myChart"
+        width="1000"
+        height="500"
+        style="
+          display: block;
+          box-sizing: border-box;
+          height: 325.6px;
+          width: 653.6px;
+        "
+      ></canvas>
+    </div>
+
+    <script>
+      const getSelectChart = document
+        .getElementById("myChart")
+        .getContext("2d");
+      const myChart = new Chart(getSelectChart, {
+        type: "bubble",
+        data: {
+          datasets: [
+            {
+              label: "Bubble chart is my chart",
+              data: [
+                {
+                  x: 9.1381066,
+                  y: 65.56180416,
+                  r: 16.83884058,
+                  company: "10x Genomics",
+                  url: "https://www.10xgenomics.com",
+                },
+                {
+                  x: 8.367871658,
+                  y: 68.5645603,
+                  r: 34.9899757,
+                  company: "3D Medicines",
+                  url: "http://www.3dmedcare.com",
+                },
+                {
+                  x: 2.376156321,
+                  y: 21.82836015,
+                  r: 6.424702759,
+                  company: "AC Immune",
+                  url: "https://www.acimmune.com",
+                },
+                {
+                  x: 9.389789413,
+                  y: 82.1058989,
+                  r: 39.59798425,
+                  company: "Acasti Pharma",
+                  url: "https://www.acastipharma.com",
+                },
+                {
+                  x: 7.723638457,
+                  y: 55.53732085,
+                  r: 38.09728398,
+                  company: "Acceleron Pharma",
+                  url: "http://acceleronpharma.com",
+                },
+                {
+                  x: 7.087005589,
+                  y: 18.8165975,
+                  r: 21.29743119,
+                  company: "ACell",
+                  url: "https://www.acell.com",
+                },
+                {
+                  x: 2.686948432,
+                  y: 7.790817251,
+                  r: 22.62442253,
+                  company: "Aclaris Therapeutics",
+                  url: "https://www.aclaristx.com",
+                },
+                {
+                  x: 9.339396772,
+                  y: 96.06623333,
+                  r: 17.24235367,
+                  company: "Iterum Therapeutics",
+                  url: "https://www.iterumtx.com",
+                },
+                {
+                  x: 6.388932081,
+                  y: 35.25400414,
+                  r: 15.39965458,
+                  company: "Lexicon Pharmaceuticals",
+                  url: "http://www.lexpharma.com",
+                },
+                {
+                  x: 2.549574064,
+                  y: 74.2239941,
+                  r: 18.24972706,
+                  company: "Masimo Corporation",
+                  url: "https://www.masimo.com",
+                },
+              ],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(205, 216, 105, 0.2)",
+                "rgba(112, 92, 92, 0.2)",
+                "rgba(135, 185, 25, 0.2)",
+                "rgba(215, 152, 104, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(205, 216, 105, 1)",
+                "rgba(112, 92, 92, 1)",
+                "rgba(135, 185, 25, 1)",
+                "rgba(215, 152, 104, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          onClick: function clickHandler(evt) {
+            const points = myChart.getElementsAtEventForMode(
+              evt,
+              "nearest",
+              { intersect: true },
+              true
+            );
+
+            if (points.length) {
+              const firstPoint = points[0];
+              const value =
+                myChart.data.datasets[firstPoint.datasetIndex].data[
+                  firstPoint.index
+                ];
+              window.open(`${value.url}`, "_blank");
+            }
+          },
+          layout: {
+            padding: 40,
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  return `${context.raw.company}`;
+                },
+              },
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
